@@ -14,15 +14,14 @@ services:
         source: ./api/src
         target: /app/src
     ports:
-      - 4000:4000
+      - 4005:4000
     depends_on:
-      - mongo
       - db
 
   db:
     image: postgres:alpine
     ports:
-      - 5433:5432
+      - 5434:5432
     environment:
       POSTGRES_DB: app
       POSTGRES_USER: root
