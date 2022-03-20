@@ -5,4 +5,4 @@ RUN npm install
 ENV NODE_OPTIONS=--max_old_space_size=8048
 COPY . .
 EXPOSE 4000
-CMD [ "npm", "start" ]
+CMD ["sh", "-c", "npm install; npm start"]

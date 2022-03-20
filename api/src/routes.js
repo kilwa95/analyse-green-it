@@ -3,15 +3,19 @@ const Exel = require("./service/Exel");
 const path = require("path");
 const csv = require("csv-parser");
 const fs = require("fs");
+const { table } = require("console");
 const router = express.Router();
 router.use(express.json());
 
 // Swagger UI
-router.get("/", (req, res, next) => {
+router.get("/indice", (req, res, next) => {
   const json = path.join(__dirname, "./content/data.json");
   let rawdata = fs.readFileSync(json);
   let r = JSON.parse(rawdata);
-  res.json(r);
+
+  const data = r.find(com => com.code_postal === req.query.codePost);
+
+  res.json(data);
 
   // const results = [];
   // const file = path.join(__dirname, "./content/data.csv");
@@ -41,6 +45,22 @@ router.get("/", (req, res, next) => {
   //     // console.log(results[0])
   //     console.log(resultFinal);
   //   });
+});
+
+router.get("/communes", (req, res, next) => {
+  const json = path.join(__dirname, "./content/data.json");
+  let rawdata = fs.readFileSync(json);
+  let r = JSON.parse(rawdata);
+  
+  let list = [];
+
+  r.forEach((com, i) => list.push({
+    key: `${com.code_postal}-${i}`,
+    value: com.commune,
+    codePost: com.code_postal
+  }));
+
+  res.json(list);
 });
 
 module.exports = router;
