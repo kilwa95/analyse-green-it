@@ -18,6 +18,19 @@ services:
     depends_on:
       - db
 
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.dev
+    environment:
+      PORT: 4000
+    volumes:
+      - type: bind
+        source: ./front/src
+        target: /app/src
+    ports:
+      - 4006:4000
+
   db:
     image: postgres:alpine
     ports:
