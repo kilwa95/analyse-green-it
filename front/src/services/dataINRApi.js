@@ -2,7 +2,7 @@ import axios from "axios";
 
 function findAll() {
   return axios
-    .get("https://geo.api.gouv.fr/communes")
+    .get("http://localhost:4005/")
     .then((response) => response.data);
 }
 

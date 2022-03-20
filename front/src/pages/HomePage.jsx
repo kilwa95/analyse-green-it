@@ -7,30 +7,26 @@ import AnalyseResult from "../components/AnalyseResult";
 const HomePage = (props) => {
   const [dataINRCommune, setDataINRCommune] = useState([
     {
-      key: "code",
-      value: "commune",
+      key: "COM",
+      value: "common",
     },
   ]);
 
   const [dataINR, setDataINR] = useState([
     {
-      commune: "commune",
-      departement: "departement",
-      region: "region",
-      scoreCommune: "score commune",
-      scoreDepartement: "score departement",
-      scoreRegion: "score region",
-    },
-  ]);
-
-  const [dataINRPrototype, setDataINRPrototype] = useState([
-    {
-      code: "00000",
-      codeDepartement: "00",
-      codeRegion: "00",
-      codesPostaux: ["00000"],
-      nom: "Example commune",
-      population: 1234,
+      code_postal: "COM",
+      commune: "Libcom",
+      dep: "Libdep",
+      region: "Libreg",
+      pop: "P16 Pop",
+      score_global_dep: "SCORE GLOBAL departement",
+      score_global_region: "SCORE GLOBAL region",
+      acces_information_dep: "ACCES A L'INFORMATION departement",
+      acces_information_region: "ACCES A L'INFORMATION region",
+      acces_interface_numirique_dep: "ACCÈS AUX INTERFACES NUMERIQUES departement",
+      acces_interface_numirique_region: "ACCÈS AUX INTERFACES NUMERIQUES region",
+      competence_admin_dep: "COMPETENCES ADMINISTATIVES departement",
+      competence_admin_region: "COMPETENCES ADMINISTATIVES region",
     },
   ]);
 
@@ -39,11 +35,11 @@ const HomePage = (props) => {
   const fetchDataINR = async () => {
     try {
       const data = await dataINRApi.findAll();
-      setDataINRPrototype(data);
+      setDataINR(data);
 
       let formatted = data.map((commune) => ({
-        key: `${commune.code}`,
-        value: `${commune.nom}`,
+        key: `${commune.code_postal}`,
+        value: `${commune.commune}`,
       }));
       setDataINRCommune(formatted);
     } catch (error) {
@@ -56,8 +52,8 @@ const HomePage = (props) => {
   }, []);
 
   const handleSelect = (obj) => {
-    const result = dataINRPrototype.filter(
-      (data) => data.code === obj.item.key
+    const result = dataINR.filter(
+      (data) => data.code_postal === obj.item.key
     );
     setResult(result[0]);
     console.log(result);
