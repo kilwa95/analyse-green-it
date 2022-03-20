@@ -1,0 +1,30 @@
+Comment lancer le projet:
+
+Dans le root du projet, lancer la commande:
+```
+docker-compose up -d
+```
+
+
+
+
+
+Questionaires:
+
+
+Quelles technos avez-vous choisies et pourquoi ?
+			
+Nous avons utilisé React pour le front car nous pouvons facilement importer des modules légers et efficaces (par exemple le composant de recherche de commune).
+Pour le back, nous avons choisi Express car il est simple, léger, et fonctionne parfaitement avec React.		
+									
+Comment avez-vous optimisé/limité vos requêtes ?				
+Il n’y a que deux requêtes qui se basent sur les mêmes données mais ne renvoie que ce dont l’utilisateur à besoin au moment de la requête. La route pour avoir la liste des communes ne renvoie que les noms, alors que la route pour avoir les informations de cette commune renvoie toutes les informations disponibles en base, mais seulement pour la commune sélectionnée. Notre champ de saisie pour la sélection de la commune n’a pas besoin d’utiliser de debounce car nous utilisons un composant React qui prend en paramètre la liste complète des communes et filtre lui-même la liste des résultats.		
+						
+Avez-vous choisi d’utiliser un outil de représentation graphique ?
+Non.			
+				
+Expliquez en quelques mots les choix réalisés au niveau du design du site ? 
+Nous sommes restés sur un design sobre qui est géré avec un simple fichier css (petit et léger). Des informations sur la commune sélectionnée sont affichées dans un tableau et pour que les scores ressortent mieux nous les avons affichés par type de score en regroupant le score de département et celui de région.				
+Qu'est ce qui fait que votre site est éco-conçu ? 
+Nous avons compressé les images au format WEBP avec https://squoosh.app/ et avons gagné environ 30% sur la taille à chaque fois en ne perdant rien en qualité. Nous avons préféré ce format à AVIF car il est mieux supporté. Nous avons tout de même utilisé la balise <picture> pour afficher les images originales au format jpeg pour les quelques navigateurs qui ne supportent pas le format WEBP.
+Nous avons également ajouté l’attribut loading=”lazy” sur les images qui ne sont pas dans le viewport au chargement de la page et n’avons pas jugé nécessaire d’utiliser le polyfill pour le peu de navigateurs qui ne supportent pas cette fonctionnalité.
